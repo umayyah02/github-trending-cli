@@ -19,6 +19,7 @@ from trending_repos.github_client import (
 VALID_DURATIONS = ("day", "week", "month", "year")
 DEFAULT_DURATION = "week"
 DEFAULT_LIMIT = 10
+MAX_LIMIT = 100
 
 
 def parse_arguments(argv=None) -> argparse.Namespace:
@@ -46,7 +47,10 @@ def parse_arguments(argv=None) -> argparse.Namespace:
     parser.add_argument(
         "--limit",
         default=DEFAULT_LIMIT,
-        help=f"Number of repositories to display. Default: {DEFAULT_LIMIT}.",
+        help=(
+            f"Number of repositories to display. Default: {DEFAULT_LIMIT}. "
+            f"Capped at {MAX_LIMIT}."
+        ),
     )
     return parser.parse_args(argv)
 
@@ -84,10 +88,15 @@ def validate_arguments(args: argparse.Namespace) -> None:
             f"Invalid --limit '{args.limit}'. Must be a positive integer (>= 1)."
         )
 
+    if limit > MAX_LIMIT:
+        print(
+            f"Warning: --limit {limit} exceeds the maximum of {MAX_LIMIT}. "
+            f"Capping at {MAX_LIMIT}.",
+            file=sys.stderr,
+        )
+        limit = MAX_LIMIT
+
     args.limit = limit
-    # NOTE: behavior when --limit exceeds a recommended maximum (clamp vs.
-    # reject) is an open design decision per the PRD appendix — deferred
-    # to Milestone 6, not yet implemented here.
 
 
 def main() -> int:
