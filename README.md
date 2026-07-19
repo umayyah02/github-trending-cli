@@ -39,6 +39,16 @@ Trending Repositories (last day)
 
 That's it — no build step, no config files.
 
+### Optional: install as a command
+
+If you'd rather type `trending-repos` instead of `python -m trending_repos.cli` every time, install it as a console script:
+
+```
+pip install -e .
+```
+
+This installs the package in "editable" mode, so `trending-repos` becomes available as a regular terminal command, and any changes you make to the source still take effect immediately (no reinstall needed).
+
 ## Usage
 
 Run the tool as a Python module from the project root:
@@ -47,8 +57,16 @@ Run the tool as a Python module from the project root:
 python -m trending_repos.cli
 ```
 
+Or, if you installed it as a command (see Installation above):
+
+```
+trending-repos
+```
+
 With no flags, this shows the top 10 trending repositories from the
-past week.
+past week. Every example below uses `python -m trending_repos.cli`,
+but `trending-repos` works identically if you installed the console
+script.
 
 ### Options
 

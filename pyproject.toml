@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trending-repos-cli"
+version = "1.0.0"
+description = "Discover trending GitHub repositories from your terminal."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.31.0",
+]
+
+[project.scripts]
+trending-repos = "trending_repos.cli:main"
+
+[tool.setuptools]
+packages = ["trending_repos"]
