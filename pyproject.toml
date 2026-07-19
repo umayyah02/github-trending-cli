@@ -17,3 +17,4 @@ trending-repos = "trending_repos.cli:main"
 
 [tool.setuptools]
 packages = ["trending_repos"]
+license = {file = "LICENSE"}
